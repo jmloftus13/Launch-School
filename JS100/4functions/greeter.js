@@ -1,20 +1,19 @@
 //enhance the greeter.js program written in chap 3
 console.clear();
+let rlSync = require('readline-sync');
 
-
-let getName = function() { 
-  let rlSync = require('readline-sync');
-  
-  let getFirstName = function() {
-    let firstName = rlSync.question('What is your first name?');
-    console.log(`Good morning, ${firstName}`);
-  };
-
-  let getLastName = function() {
-    let lastName = rlSync.question('What is your last name?');
-    console.log(`Good morning, ${lastName}!`);
-  };
-  
+function getName () { 
+    let firstName = rlSync.question('What is your first name? ');
+    let lastName = rlSync.question('What is your last name? ');
+    console.log(`Good morning, ${firstName} ${lastName}!`);
 };
+
 getName();
-//console.log(`Good morning, ${firstName} ${lastName}!`);
+
+
+//create function
+//ask for fname
+//ask lname
+//return fullname as a string with greeting
+//input - does the function need a parameter? no
+//output - a string

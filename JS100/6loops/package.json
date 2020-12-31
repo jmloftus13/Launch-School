@@ -1,14 +1,14 @@
 {
-  "name": "4functions",
+  "name": "6loops",
   "version": "1.0.0",
-  "main": "greeter.js",
+  "description": "",
+  "main": "age-for-loop.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "readline-sync": "^1.4.10"
   }
