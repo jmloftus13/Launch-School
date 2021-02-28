@@ -1,0 +1,27 @@
+{
+  "name": "Launch-School",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint-cli": "^1.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.20.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmloftus13/Launch-School.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmloftus13/Launch-School/issues"
+  },
+  "homepage": "https://github.com/jmloftus13/Launch-School#readme"
+}
