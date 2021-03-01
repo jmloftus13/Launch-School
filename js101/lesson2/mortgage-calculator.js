@@ -1,5 +1,5 @@
 /*PEDAC
-Problem: 
+Problem:
 -input: integers
 -output: string
 -identify rules/requirements:
@@ -9,19 +9,19 @@ Problem:
    -calculate monthly interest rate
    -calculate loan duration in months
    -print payment as dollar & cents
-  
+
 Implicit requirements
  - User validation (while loop)
- - Possible data type validation 
+ - Possible data type validation
  - requie a loan amount great than 0
  - allow for an APR of 0
  - allow for additional calculatins
  - when validating input
- 
--clarifying questions: 
+
+-clarifying questions:
    -how to handle the APR rate from user
    -ask for loan duration in months or years
-  
+
 Examples/Test Cases:
   -non numeric, null or empty input
   -boundaries of the numbers?
@@ -60,10 +60,10 @@ function isItValidApr(number) {
 //body of program
 console.log('Monthly Mortgage/Car Payment Calculator');
 
-while (true) { 
+while (true) {
 
   //get the inputs and validate
-  console.log('What is the total loan amount? ')
+  console.log('What is the total loan amount? ');
   let totalLoanAmount = readline.question();
 
   while (isItValid(totalLoanAmount)) {
@@ -71,7 +71,7 @@ while (true) {
     totalLoanAmount = readline.question();
   }
 
-  console.log('What is the Annual Percentage Rate (enter 0 if no interest rate): ')
+  console.log('What is the Annual Percentage Rate (enter 0 if no interest rate): ');
   let apr =  readline.question();
 
   while (isItValidApr(apr)) {
@@ -79,21 +79,21 @@ while (true) {
     apr = readline.question();
   }
 
-  console.log('What is the duration of the loan in years: ')
+  console.log('What is the duration of the loan in years: ');
   let loanDurationYears =  readline.question();
 
   while (isItValid(loanDurationYears)) {
     console.log("Please enter valid whole numbers:");
-    loanDuration = readline.question();
+    loanDurationYears = readline.question();
   }
 
 
   //calculations
-  let monthlyInterestRate = (Number(apr) / 100) /12;
+  let monthlyInterestRate = (Number(apr) / 100) / 12;
   let loanDurationMonths = Number(loanDurationYears) * 12;
   let monthlyPayment;
 
-  if (Number(apr) !== 0) { 
+  if (Number(apr) !== 0) {
     monthlyPayment = Number(totalLoanAmount) * (monthlyInterestRate / (1 - Math.pow((1 + monthlyInterestRate), (-loanDurationMonths))));
     let totalPayment = monthlyPayment * loanDurationMonths;
 
@@ -106,9 +106,9 @@ while (true) {
     console.log(`Your monthly payment will be $${monthlyPayment.toFixed(2)}`);
   }
 
-console.log('Would you like to perform another operation? (y/n)');
-let answer = readline.question();
+  console.log('Would you like to perform another operation? (y/n)');
+  let answer = readline.question();
 
-if (answer[0].toLowerCase() !== 'y') break;
-console.clear();
-} //outer while loop
+  if (answer[0].toLowerCase() !== 'y') break;
+  console.clear();
+}
