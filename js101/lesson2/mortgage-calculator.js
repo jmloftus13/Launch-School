@@ -46,67 +46,80 @@ Algorithm:
 -calculate the monthly payment
 -output the monthly payment in dollars & cents as $200.50
 */
+
 console.clear();
 const readline = require('readline-sync');
 
+// functions defined
 function isItValid(number) {
-  return number.trimStart() === '' || Number(number) <= 0 || Number.isNaN(Number(number));
+  return number.trimStart() === '' || Number.isNaN(Number(number)) || Number(number) <= 0;
 }
 
 function isItValidApr(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
 
-//body of program
-console.log('Monthly Mortgage/Car Payment Calculator');
+function prompt(string) {
+  console.log('>',string);
+}
 
-while (true) {
+function output(monthlyPayment, loanDurationMonths, totalPayment, totalLoanAmount) {
+  //better way to justify the output?
+  prompt(`Your monthly payment will be: $${monthlyPayment.toFixed(2).padStart(10, " ")}`);
+  prompt(`Your total of ${loanDurationMonths} payments is: $${totalPayment.toFixed(2).padStart(11, " ")}`);
+  prompt(`Your total interest is: $${(totalPayment - totalLoanAmount).toFixed(2).padStart(17, " ")}`);
+}
 
-  //get the inputs and validate
-  console.log('What is the total loan amount? ');
-  let totalLoanAmount = readline.question();
-
-  while (isItValid(totalLoanAmount)) {
-    console.log("Please enter valid whole numbers:");
-    totalLoanAmount = readline.question();
-  }
-
-  console.log('What is the Annual Percentage Rate (enter 0 if no interest rate): ');
-  let apr =  readline.question();
-
-  while (isItValidApr(apr)) {
-    console.log("Please enter valid whole numbers (enter 0 if no interest rate):");
-    apr = readline.question();
-  }
-
-  console.log('What is the duration of the loan in years: ');
-  let loanDurationYears =  readline.question();
-
-  while (isItValid(loanDurationYears)) {
-    console.log("Please enter valid whole numbers:");
-    loanDurationYears = readline.question();
-  }
-
-
-  //calculations
+function calc(apr,totalLoanAmount, loanDurationYears) {
   let monthlyInterestRate = (Number(apr) / 100) / 12;
   let loanDurationMonths = Number(loanDurationYears) * 12;
   let monthlyPayment;
+  let nomEquation = Number(totalLoanAmount) * (monthlyInterestRate);
+  let denomEquation = 1 - Math.pow((1 + monthlyInterestRate), (-loanDurationMonths));
 
+  // handle apr rate of 0%
   if (Number(apr) !== 0) {
-    monthlyPayment = Number(totalLoanAmount) * (monthlyInterestRate / (1 - Math.pow((1 + monthlyInterestRate), (-loanDurationMonths))));
+    monthlyPayment = nomEquation / denomEquation;
     let totalPayment = monthlyPayment * loanDurationMonths;
-
-    console.log(`Your monthly payment will be $${monthlyPayment.toFixed(2)}`);
-    console.log(`Your total of ${loanDurationMonths} payments is $${totalPayment.toFixed(2)}`);
-    console.log(`Your total interest is $${(totalPayment - totalLoanAmount).toFixed(2)}`);
-
+    output(monthlyPayment, loanDurationMonths, totalPayment, totalLoanAmount);
   } else {
     monthlyPayment = totalLoanAmount / loanDurationMonths;
-    console.log(`Your monthly payment will be $${monthlyPayment.toFixed(2)}`);
+    prompt(`Your monthly payment will be: $${monthlyPayment.toFixed(2).padStart(5, " ")}`);
+  }
+}
+
+//program loop
+prompt('Monthly Mortgage/Car Payment Calculator');
+
+while (true) {
+  //get the inputs and validate
+  prompt('What is the total loan amount? ');
+  let totalLoanAmount = readline.question();
+
+  while (isItValid(totalLoanAmount)) {
+    prompt("Please enter valid whole numbers:");
+    totalLoanAmount = readline.question();
   }
 
-  console.log('Would you like to perform another operation? (y/n)');
+  prompt('What is the Annual Percentage Rate (enter 0 if no interest rate): ');
+  let apr =  readline.question();
+
+  while (isItValidApr(apr)) {
+    prompt("Please enter valid whole numbers (enter 0 if no interest rate):");
+    apr = readline.question();
+  }
+
+  prompt('What is the duration of the loan in years: ');
+  let loanDurationYears =  readline.question();
+
+  while (isItValid(loanDurationYears)) {
+    prompt("Please enter valid whole numbers:");
+    loanDurationYears = readline.question();
+  }
+
+  calc(apr, totalLoanAmount, loanDurationYears);
+
+  prompt('Would you like to perform another operation? (y/n)');
   let answer = readline.question();
 
   if (answer[0].toLowerCase() !== 'y') break;
