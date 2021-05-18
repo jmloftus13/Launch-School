@@ -52,7 +52,7 @@ Code */
 
 console.clear();
 const readline = require('readline-sync');
-const VALID_CHOICES = ['rock', 'paper', 'scissors'];
+const VALID_CHOICES = ['rock', 'r', 'paper', 'p', 'scissors', 's', 'lizard', 'l', 'spock', 'S'];
 
 function prompt(message) {
   console.log(`=> ${message}`);
@@ -61,21 +61,31 @@ function prompt(message) {
 function displayWinner(choice, computerChoice) {
   prompt(`You chose ${choice}, computer chose ${computerChoice}`);
 
-  if ((choice === 'rock' && computerChoice === 'scissors') ||
-      (choice === 'paper' && computerChoice === 'rock') ||
-      (choice === 'scissors' && computerChoice === 'paper')) {
+  if ((choice === 'rock' && computerChoice === 'scissors' || 'lizard') ||
+      (choice === 'paper' && computerChoice === 'rock' || 'spock') ||
+      (choice === 'scissors' && computerChoice === 'paper' || 'lizard')
+      (choice === 'lizard' && computerChoice === 'paper' || 'spock') 
+      (choice === 'spock' && computerChoice === 'rock' || 'scissors')) {
     prompt('You win!');
-  } else if ((choice === 'rock' && computerChoice === 'paper') ||
-             (choice === 'paper' && computerChoice === 'scissors') ||
-             (choice === 'scissors' && computerChoice === 'rock')) {
+  } else if ((choice === 'rock' && computerChoice === 'paper' || 'spock') ||
+             (choice === 'paper' && computerChoice === 'scissors' || 'lizard') ||
+             (choice === 'scissors' && computerChoice === 'rock' || 'spock')
+             (choice === 'lizard' && computerChoice === 'rock' || 'scissors')
+             (choice === 'spock' && computerChoice === 'lizard' || 'paper')) {
     prompt('Computer wins!');
   } else {
     prompt("It's a tie!");
   }
 }
 
+//program loop
+prompt('Welcome to Rock, Paper, Scissors, Lizard, Spock\n');
+
 while (true) {
-  prompt(`Choose one: ${VALID_CHOICES.join(', ')}`);
+  prompt(`Choose one:(rock, paper, scissors, lizard or spock) 
+    You may enter the word or first letter of your choice 
+    (use lowercase 's' for scissors and uppercase 'S' for spock). 
+  ${VALID_CHOICES.join(', ')}`);
   let choice = readline.question();
 
   while (!VALID_CHOICES.includes(choice)) {
